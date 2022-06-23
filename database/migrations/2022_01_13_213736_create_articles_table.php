@@ -18,8 +18,8 @@ class CreateArticlesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->string('title');
-            $table->string('description')->nullable();
+            $table->string('title', 50);
+            $table->string('description', 256)->nullable();
             $table->text('body');
             $table->boolean('is_starred')->default(false);
         });

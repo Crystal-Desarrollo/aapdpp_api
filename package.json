@@ -1,13 +1,12 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "test": "php artisan test",
+        "test:parallel": "php artisan test --parallel",
+        "test:watch": "phpunit-watcher watch",
+        "test:feature": "php artisan test --testsuite=Feature",
+        "test:unit": "php artisan test --testsuite=Unit",
+        "test:coverage": "php artisan test --coverage"
     },
     "devDependencies": {
         "axios": "^0.25",

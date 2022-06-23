@@ -16,9 +16,7 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $links = Link::all();
-
-        return response()->json($links, 200);
+        return response()->json(Link::all(), 200);
     }
 
     /**
@@ -30,9 +28,7 @@ class LinkController extends Controller
     public function store(StoreLinkRequest $request)
     {
         $validated = $request->validated();
-
         $link = Link::create($validated);
-
         return response()->json($link, 201);
     }
 
@@ -57,9 +53,7 @@ class LinkController extends Controller
     public function update(UpdateLinkRequest $request, Link $link)
     {
         $validated = $request->validated();
-
         $link->update($validated);
-
         return response()->json($link, 200);
     }
 
@@ -72,7 +66,6 @@ class LinkController extends Controller
     public function destroy(Link $link)
     {
         $link->delete();
-
         return response()->json(null, 204);
     }
 }

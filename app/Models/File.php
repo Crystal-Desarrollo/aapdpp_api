@@ -9,7 +9,7 @@ use \Illuminate\Database\Eloquent\Casts\Attribute;
 class File extends Model
 {
     use HasFactory;
-    protected $fillable = ["path", "name"];
+    protected $fillable = ["path", "name", "alt_text"];
 
     public function Fileable()
     {
@@ -24,7 +24,7 @@ class File extends Model
     protected function path(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value != '' ? "/storage/files/" . $value : '/default_image.png',
+            get: fn ($value) => $value != '' ? "/storage/" . $value : '/default_image.png',
         );
     }
 }

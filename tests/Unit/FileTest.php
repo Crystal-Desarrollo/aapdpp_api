@@ -22,12 +22,14 @@ class FileTest extends TestCase
     public function test_path_is_correct()
     {
 
-        $filename = "testImage.png";
+        $filePath = "/files/testImage.png";
 
         $file = new File([
-            "path" => $filename
+            "path" => $filePath
         ]);
 
-        assertEquals("/storage/files/" . $filename, $file->path);
+        assertEquals("/storage/" . $filePath, $file->path);
     }
+
+    //TODO: Test altText is fileName if not specified
 }

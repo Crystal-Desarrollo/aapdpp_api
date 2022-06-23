@@ -6,10 +6,7 @@ use App\Models\Link;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-use function PHPUnit\Framework\assertJson;
-use function PHPUnit\Framework\assertJsonStringEqualsJsonString;
-
-class ExampleTest extends TestCase
+class LinkTest extends TestCase
 {
 
     use RefreshDatabase;
@@ -75,7 +72,6 @@ class ExampleTest extends TestCase
         ];
 
         Link::create($exampleLinks[0]);
-
         Link::create($exampleLinks[1]);
 
         $response = $this->JSON("GET", '/api/links');
@@ -172,7 +168,7 @@ class ExampleTest extends TestCase
     }
 
     /**
-     * Single link can be retrieved
+     * Delete a link
      *
      * @return void
      */

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("name", 128);
             $table->string("path", 512);
             $table->string("alt_text", 128);
-            $table->morphs('fileable');
+            $table->nullableMorphs('fileable');
         });
     }
 
