@@ -7,8 +7,6 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Services\FileService;
 
-use function PHPUnit\Framework\isNull;
-
 class ArticleController extends Controller
 {
     /**
