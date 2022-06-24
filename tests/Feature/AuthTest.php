@@ -4,14 +4,20 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
 
     use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
+
+    //TODO: test email address must be unique
 
     /**
      * Chck the required fields on register
@@ -110,8 +116,9 @@ class AuthTest extends TestCase
      */
     public function test_user_can_login()
     {
-        $password = '123abc';
+        $this->app->get('auth')->forgetGuards(); //Make the test as guest
 
+        $password = '123abc';
         $userData = [
             'name' => "John Doe",
             'email' => "test@example.com",
@@ -137,8 +144,9 @@ class AuthTest extends TestCase
      */
     public function test_invalid_credentials_are_rejected()
     {
-        $password = '123abc';
+        $this->app->get('auth')->forgetGuards(); //Make the test as guest
 
+        $password = '123abc';
         $userData = [
             'name' => "John Doe",
             'email' => "test@example.com",

@@ -15,6 +15,11 @@ class ArticleTest extends TestCase
 
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
+
     /**
      * Title is required to create
      *

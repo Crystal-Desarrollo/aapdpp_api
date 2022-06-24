@@ -2,14 +2,22 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use App\Models\Link;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
+
 
 class LinkTest extends TestCase
 {
 
     use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
 
     /**
      * URL is required to create
