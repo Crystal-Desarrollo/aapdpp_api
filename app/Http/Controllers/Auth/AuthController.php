@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginUserRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -68,7 +69,7 @@ class AuthController extends Controller
      * */
     public function logout()
     {
-        Auth::user()->tokens()->delete();
+        auth()->user()->tokens()->delete();
         return response()->json('', 204);
     }
 }
