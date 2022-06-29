@@ -16,6 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        //TODO show only 6 if no member
         return response()->json(Article::all(), 200);
     }
 

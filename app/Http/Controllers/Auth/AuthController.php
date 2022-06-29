@@ -72,4 +72,14 @@ class AuthController extends Controller
         auth()->user()->tokens()->delete();
         return response()->json('', 204);
     }
+
+    /** 
+     * Returns token's user
+     * 
+     * @return \Illuminate\Http\Response
+     * */
+    public function me()
+    {
+        return response()->json(auth()->user(), 200);
+    }
 }
