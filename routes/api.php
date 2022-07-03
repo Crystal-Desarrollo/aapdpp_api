@@ -21,9 +21,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');
-Route::get("/articles", [ArticleController::class, 'index']);
-
 Route::group(["middleware" => "auth:sanctum"], function () {
     Route::apiResource("/links", LinkController::class);
     Route::apiResource("/articles", ArticleController::class);
@@ -32,3 +29,7 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::post("/logout", [AuthController::class, 'logout'])->name("auth.logout");
     Route::get('/user', [AuthController::class, 'me'])->name('auth.me');
 });
+
+Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');
+Route::get("/articles", [ArticleController::class, 'index']);
+Route::get("/links", [LinkController::class, 'index']);
