@@ -29,6 +29,7 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('aapdppToken')->plainTextToken;
+        $user->load('role');
 
         return response()->json([
             "user" => $user,
@@ -54,6 +55,7 @@ class AuthController extends Controller
 
         $user->tokens()->delete();
         $newToken = $user->createToken('aapdppToken')->plainTextToken;
+        $user->load('role');
 
         return response()->json([
             "user" => $user,
@@ -80,6 +82,8 @@ class AuthController extends Controller
      * */
     public function me()
     {
-        return response()->json(auth()->user(), 200);
+        $user = auth()->user();
+        $user->load('role');
+        return response()->json($user, 200);
     }
 }

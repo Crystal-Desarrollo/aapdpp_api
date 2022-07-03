@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Link;
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +24,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Article::factory()->count(10)->create();
-        Link::factory()->count(15)->create();
+        if (env('APP_ENV') !== 'production') {
+            Article::factory()->count(10)->create();
+            Link::factory()->count(15)->create();
+        }
+
+        Role::factory()->create(['name' => 'admin']);
+        Role::factory()->create(['name' => 'member']);
     }
 }
