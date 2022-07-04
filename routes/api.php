@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::post("/register", [AuthController::class, 'register'])->name("auth.register");
     Route::post("/logout", [AuthController::class, 'logout'])->name("auth.logout");
     Route::get('/user', [AuthController::class, 'me'])->name('auth.me');
+    Route::put('/users', [UserController::class, 'update'])->name('users.update');
 });
 
 Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');

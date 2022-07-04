@@ -81,8 +81,9 @@ class ArticleTest extends TestCase
 
         $response->assertCreated();
         $response->assertJsonFragment([
-            "fileable_id" => $articleId,
-            "fileable_type" => Article::class
+            "alt_text" => "coverImage",
+            "fileable_type" => Article::class,
+            "fileable_id" => (string)$articleId,
         ]);
         $this->assertDatabaseCount("articles", 1);
         $this->assertDatabaseHas("files", [
