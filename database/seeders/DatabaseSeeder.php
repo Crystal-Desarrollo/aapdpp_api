@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $env = env('APP_ENV');
 
-        if (DB::table('roles')->count() === 0) {
+        if (DB::table('roles')->count() == 0) {
             DB::table('roles')->insert([['name' => 'admin'], ['name' => 'member']]);
         }
 
@@ -37,12 +37,15 @@ class DatabaseSeeder extends Seeder
         if ($env == 'local' || $env == 'staging') {
             DB::table('users')->truncate();
 
+            $adminRoleId = Role::where('name', 'admin');
+            $memberRoleId = Role::where('name', 'member');
+
             DB::table('users')->insert([
                 [
                     'name' => 'Test Admin',
                     'email' => 'admin@example.com',
                     'email_verified_at' => now(),
-                    'role_id' => 1,
+                    'role_id' => $adminRoleId,
                     'remember_token' => Str::random(10),
                     'password' => bcrypt('mypass'), // password
                 ],
@@ -50,7 +53,7 @@ class DatabaseSeeder extends Seeder
                     'name' => 'Test User',
                     'email' => 'user@example.com',
                     'email_verified_at' => now(),
-                    'role_id' => 2,
+                    'role_id' => $memberRoleId,
                     'remember_token' => Str::random(10),
                     'password' => bcrypt('mypass'), // password
                 ]
