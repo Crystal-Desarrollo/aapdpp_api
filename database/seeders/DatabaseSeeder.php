@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
         $env = env('APP_ENV');
 
         if (DB::table('roles')->count() === 0) {
-            Role::factory()->create(['name' => 'admin']);
-            Role::factory()->create(['name' => 'member']);
+            DB::table('roles')->insert(['name' => 'admin']);
+            DB::table('roles')->insert(['name' => 'member']);
         }
 
-        if ($env === 'local') {
+        if ($env == 'local') {
             DB::table('articles')->truncate();
             DB::table('links')->truncate();
 
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             Link::factory()->count(15)->create();
         }
 
-        if ($env === 'local' || $env === 'staging') {
+        if ($env == 'local' || $env == 'staging') {
             DB::table('users')->truncate();
 
             DB::table('users')->insert([
