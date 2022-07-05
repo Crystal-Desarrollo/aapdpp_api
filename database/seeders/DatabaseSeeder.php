@@ -32,22 +32,23 @@ class DatabaseSeeder extends Seeder
         if ($env === 'local' || $env === 'staging') {
             DB::table('users')->truncate();
 
-            User::factory()->create([
-                'name' => 'Test User',
-                'email' => 'user@example.com',
-                'email_verified_at' => now(),
-                'role' => 2,
-                'remember_token' => Str::random(10),
-                'password' => bcrypt('mypass'), // password
-            ]);
-
-            User::factory()->create([
-                'name' => 'Test Admin',
-                'email' => 'admin@example.com',
-                'email_verified_at' => now(),
-                'role' => 1,
-                'remember_token' => Str::random(10),
-                'password' => bcrypt('mypass'), // password
+            DB::table('users')->insert([
+                [
+                    'name' => 'Test Admin',
+                    'email' => 'admin@example.com',
+                    'email_verified_at' => now(),
+                    'role_id' => 1,
+                    'remember_token' => Str::random(10),
+                    'password' => bcrypt('mypass'), // password
+                ],
+                [
+                    'name' => 'Test User',
+                    'email' => 'user@example.com',
+                    'email_verified_at' => now(),
+                    'role_id' => 2,
+                    'remember_token' => Str::random(10),
+                    'password' => bcrypt('mypass'), // password
+                ]
             ]);
         }
 
