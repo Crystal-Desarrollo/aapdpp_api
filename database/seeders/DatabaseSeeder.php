@@ -19,15 +19,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        $env = env('APP_ENV');
 
-        if (env('APP_ENV') === 'local' || env('APP_ENV') === 'staging') {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            DB::table('users')->truncate();
+        if ($env === 'local') {
             DB::table('articles')->truncate();
             DB::table('links')->truncate();
 
             Article::factory()->count(10)->create();
             Link::factory()->count(15)->create();
+        }
+
+        if ($env === 'local' || env('APP_ENV') === 'staging') {
+            DB::table('users')->truncate();
 
             User::factory()->create([
                 'name' => 'Test User',
@@ -45,7 +48,6 @@ class DatabaseSeeder extends Seeder
                 'role' => 1,
                 'remember_token' => Str::random(10),
                 'password' => bcrypt('mypass'), // password
-
             ]);
         }
 
