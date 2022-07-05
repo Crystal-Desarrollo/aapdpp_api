@@ -21,6 +21,11 @@ class DatabaseSeeder extends Seeder
 
         $env = env('APP_ENV');
 
+        if (DB::table('roles')->count() === 0) {
+            Role::factory()->create(['name' => 'admin']);
+            Role::factory()->create(['name' => 'member']);
+        }
+
         if ($env === 'local') {
             DB::table('articles')->truncate();
             DB::table('links')->truncate();
@@ -50,11 +55,6 @@ class DatabaseSeeder extends Seeder
                     'password' => bcrypt('mypass'), // password
                 ]
             ]);
-        }
-
-        if (DB::table('roles')->count() === 0) {
-            Role::factory()->create(['name' => 'admin']);
-            Role::factory()->create(['name' => 'member']);
         }
     }
 }
