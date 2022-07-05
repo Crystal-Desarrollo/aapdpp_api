@@ -23,8 +23,7 @@ class DatabaseSeeder extends Seeder
         $env = env('APP_ENV');
 
         if (DB::table('roles')->count() === 0) {
-            DB::table('roles')->insert(['name' => 'admin']);
-            DB::table('roles')->insert(['name' => 'member']);
+            DB::table('roles')->insert([['name' => 'admin'], ['name' => 'member']]);
         }
 
         if ($env == 'local') {
