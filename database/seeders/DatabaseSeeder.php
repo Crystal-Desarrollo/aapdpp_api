@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             Link::factory()->count(15)->create();
         }
 
-        if ($env === 'local' || env('APP_ENV') === 'staging') {
+        if ($env === 'local' || $env === 'staging') {
             DB::table('users')->truncate();
 
             User::factory()->create([
