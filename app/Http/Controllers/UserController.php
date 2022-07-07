@@ -15,6 +15,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         $user->update($validated);
+        $user->load('role');
 
         return response()->json($user, 200);
     }
