@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(["middleware" => "auth:sanctum"], function () {
     Route::apiResource("/links", LinkController::class);
     Route::apiResource("/articles", ArticleController::class);
@@ -29,7 +25,9 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::post("/register", [AuthController::class, 'register'])->name("auth.register");
     Route::post("/logout", [AuthController::class, 'logout'])->name("auth.logout");
     Route::get('/user', [AuthController::class, 'me'])->name('auth.me');
-    Route::put('/users', [UserController::class, 'update'])->name('users.update');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
 });
 
 Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginUserRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Mail\FirstLoginMail;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -22,19 +26,18 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request)
     {
         $validated = $request->validated();
-        $user = User::create([
-            "name" => $validated['name'],
-            'email' => $validated['email'],
-            "password" => bcrypt($validated['password'])
-        ]);
+        $user = User::make($validated);
 
-        $token = $user->createToken('aapdppToken')->plainTextToken;
-        $user->load('role');
+        $temporalPass = Str::random();
+        $user->password = bcrypt($temporalPass);
+        $user->role_id = Role::where('name', 'member')->first()->id;
+        $user->save();
 
-        return response()->json([
-            "user" => $user,
-            "token" => $token
-        ], 201);
+        $mail = new FirstLoginMail($validated['email'], $validated['name'], $temporalPass);
+
+        Mail::to($validated['email'])->send($mail);
+
+        return response()->json($user, 201);
     }
 
     /** 
