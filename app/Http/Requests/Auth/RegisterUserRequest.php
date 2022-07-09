@@ -29,6 +29,7 @@ class RegisterUserRequest extends FormRequest
             'phone' => 'string|nullable|max:15',
             'address' => 'string|nullable|max:100',
             'additional_info' => 'string|nullable|max:512',
+            'picture' => 'nullable|image|max:10000'
         ];
     }
 }

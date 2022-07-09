@@ -25,7 +25,6 @@ class UserTest extends TestCase
      */
     public function test_update_user()
     {
-        $this->withExceptionHandling();
         $user = User::factory()->create();
         $data = [
             'name' => 'test name',
@@ -35,8 +34,7 @@ class UserTest extends TestCase
             'additional_info' => Str::random(100)
         ];
 
-        Sanctum::actingAs($user);
-        $response = $this->json('put', route('users.update'), $data);
+        $response = $this->json('put', route('users.update', $user->id), $data);
 
         $response->assertOk();
         $response->assertJson($data);

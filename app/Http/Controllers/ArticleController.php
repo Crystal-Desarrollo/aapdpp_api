@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\File;
 use App\Services\FileService;
 
 class ArticleController extends Controller
@@ -34,7 +35,7 @@ class ArticleController extends Controller
         //Save cover image if sent
         $file = $request->file("cover");
         if (isset($file)) {
-            $storedFile = FileService::storeFile($file);
+            $storedFile = File::storeFile($file);
             $article->cover()->save($storedFile);
             $article->load("cover");
         }
@@ -68,7 +69,7 @@ class ArticleController extends Controller
         //Update cover image if sent
         $file = $request->file("cover");
         if (isset($file)) {
-            $storedFile = FileService::storeFile($file);
+            $storedFile = File::storeFile($file);
             $article->cover()->delete();
             $article->cover()->save($storedFile);
             $article->load("cover");

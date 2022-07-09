@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginUserRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Mail\FirstLoginMail;
+use App\Models\File;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -31,10 +32,19 @@ class AuthController extends Controller
         $temporalPass = Str::random();
         $user->password = bcrypt($temporalPass);
         $user->role_id = Role::where('name', 'member')->first()->id;
+
         $user->save();
 
-        $mail = new FirstLoginMail($validated['email'], $validated['name'], $temporalPass);
+        if (isset($validated['picture'])) {
+            $picture = $validated['picture'];
+            $storedFile = File::storeFile($picture);
+            $user->avatar()->save($storedFile);
+        }
 
+        $user->load('avatar');
+        $user->load('role');
+
+        $mail = new FirstLoginMail($validated['email'], $validated['name'], $temporalPass);
         Mail::to($validated['email'])->send($mail);
 
         return response()->json($user, 201);

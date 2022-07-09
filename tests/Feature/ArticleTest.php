@@ -80,11 +80,7 @@ class ArticleTest extends TestCase
         $articleId = $response->json()['id'];
 
         $response->assertCreated();
-        $response->assertJsonFragment([
-            "alt_text" => "coverImage",
-            "fileable_type" => Article::class,
-            "fileable_id" => (string)$articleId,
-        ]);
+        $response->assertJsonStructure(["cover"]);
         $this->assertDatabaseCount("articles", 1);
         $this->assertDatabaseHas("files", [
             "fileable_type" => Article::class,
@@ -239,7 +235,7 @@ class ArticleTest extends TestCase
 
         $articleId = $responsePost->json("id");
         $file2 = UploadedFile::fake()->image("image2.png");
-        $responsePut = $this->put(
+        $this->put(
             route('articles.update', $articleId),
             [
                 "title" => Str::random(40),
@@ -252,14 +248,6 @@ class ArticleTest extends TestCase
         $this->assertDatabaseHas("files", [
             "fileable_type" => Article::class,
             "fileable_id" => $articleId,
-            "alt_text" =>
-            pathinfo($file2->getClientOriginalName(), PATHINFO_FILENAME),
-        ]);
-        $this->assertDatabaseMissing("files", [
-            "fileable_type" => Article::class,
-            "fileable_id" => $articleId,
-            "alt_text" =>
-            pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
         ]);
 
         /** 

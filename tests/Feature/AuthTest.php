@@ -44,34 +44,6 @@ class AuthTest extends TestCase
         ]);
         $response->assertStatus(422);
         $response->assertSeeText("The email field is required.");
-
-        //Check password is required
-        $response = $this->json("post", route("auth.register"), [
-            'name' => "test",
-            'email' => "test@example.com",
-            'password_confirmation' => "abc123",
-        ]);
-        $response->assertStatus(422);
-        $response->assertSeeText("The password field is required.");
-
-        //Check password_confirmation is required
-        $response = $this->json("post", route("auth.register"), [
-            'name' => "test",
-            'email' => "test@example.com",
-            'password' => "abc123",
-        ]);
-        $response->assertStatus(422);
-        $response->assertSeeText("The password confirmation does not match.");
-
-        //Check password_confirmation must be same as password
-        $response = $this->json("post", route("auth.register"), [
-            'name' => "test",
-            'email' => "test@example.com",
-            'password' => "abc123",
-            'password_confirmation' => "abc123456",
-        ]);
-        $response->assertStatus(422);
-        $response->assertSeeText("The password confirmation does not match.");
     }
 
     /**
@@ -84,8 +56,6 @@ class AuthTest extends TestCase
         $userData = [
             'name' => "John Doe",
             'email' => "test@example.com",
-            'password' => "abc123",
-            'password_confirmation' => "abc123",
         ];
 
         $response = $this->json("post", route("auth.register"), $userData);
@@ -93,10 +63,9 @@ class AuthTest extends TestCase
         $userId = $response->json("user.id");
 
         $response->assertStatus(201);
-        $response->assertJsonStructure(['user' => ['name', 'email'], 'token']);
-        $response->assertJson(['user' => ['name' => $userData['name'], 'email' => $userData['email']]]);
+        $response->assertJsonStructure(['name', 'email', 'avatar', 'role']);
+        $response->assertJson(['name' => $userData['name'], 'email' => $userData['email']]);
         $this->assertDatabaseHas('users', ['name' => $userData['name'], 'email' => $userData['email']]);
-        $this->assertDatabaseHas('personal_access_tokens', ['tokenable_type' => User::class, 'tokenable_id' => $userId]);
     }
 
     /**
