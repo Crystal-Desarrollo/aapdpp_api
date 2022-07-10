@@ -63,7 +63,7 @@ class AuthController extends Controller
         $user = User::where(['email' => $validated['email']])->first();
 
         if (!$user || !Hash::check($validated['password'], $user->password)) {
-            return response()->json('Invalid credentials.', 401);
+            return response()->json('Usuario o contraseña incorrecto', 401);
         }
 
         $user->tokens()->delete();

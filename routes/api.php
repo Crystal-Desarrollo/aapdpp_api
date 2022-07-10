@@ -28,6 +28,7 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
+    Route::put('/users/{user}/status', [UserController::class, 'updateSubscriptionStatus'])->name('users.updateStatus');
 });
 
 Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');
