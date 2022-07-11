@@ -140,7 +140,7 @@ class AuthTest extends TestCase
         ]);
 
         $response->assertUnauthorized();
-        $response->assertSeeText("Invalid credentials");
+        $response->assertSeeText("Usuario o contraseña incorrecto");
     }
 
     /**
