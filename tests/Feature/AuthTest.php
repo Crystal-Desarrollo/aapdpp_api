@@ -131,7 +131,7 @@ class AuthTest extends TestCase
         ]);
 
         $response->assertUnauthorized();
-        $response->assertSeeText("Invalid credentials");
+        $response->assertSeeText("Usuario o contraseña incorrecto");
 
         //Check with wrong password
         $response = $this->json("post", route('auth.login'), [
