@@ -131,7 +131,7 @@ class AuthTest extends TestCase
         ]);
 
         $response->assertUnauthorized();
-        $response->assertSeeText("Usuario o contrase\u00f1aa incorrecto");
+        $response->assertSeeText("Usuario o contrase\u00f1a incorrecto");
 
         //Check with wrong password
         $response = $this->json("post", route('auth.login'), [
@@ -140,7 +140,7 @@ class AuthTest extends TestCase
         ]);
 
         $response->assertUnauthorized();
-        $response->assertSeeText("Usuario o contrase\u00f1aa incorrecto");
+        $response->assertSeeText("Usuario o contrase\u00f1a incorrecto");
     }
 
     /**
