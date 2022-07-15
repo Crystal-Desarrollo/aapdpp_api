@@ -10,7 +10,7 @@ class File extends Model
 {
     use HasFactory;
     protected $fillable = ["path", "name", "alt_text"];
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'fileable_type', 'fileable_id', 'id'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'fileable_type', 'fileable_id'];
 
     public function Fileable()
     {
