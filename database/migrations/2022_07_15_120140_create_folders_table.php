@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("name", 100);
             $table->foreignId('parent_id')->nullable()->references('id')->on('folders');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -11,6 +11,8 @@ class Folder extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['name'];
+
     public function files()
     {
         return $this->morphMany(File::class, "fileable");
