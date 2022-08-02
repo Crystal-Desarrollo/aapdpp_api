@@ -10,4 +10,6 @@ class Meeting extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $fillable = ['date', 'location', 'description'];
 }
