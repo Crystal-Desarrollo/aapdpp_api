@@ -26,11 +26,21 @@ class FileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFileRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        $file = File::create($validated);
-        return response($file, 201);
+        $requestFiles = $request->file('files');
+        $folderId = $request->input('folder');
+        $folder = Folder::find($folderId);
+
+        $files = [];
+        foreach ($requestFiles as $requestFile) {
+            $file = File::storeFile($requestFile);
+            $folder->files()->save($file);
+            $file->load('fileable');
+            array_push($files, $file);
+        }
+
+        return response($files, 201);
     }
 
     /**

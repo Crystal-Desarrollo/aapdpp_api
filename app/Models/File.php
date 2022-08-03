@@ -11,10 +11,10 @@ class File extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ["path", "name", "alt_text"];
+    protected $fillable = ["path", "name", "alt_text", 'original_name'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'fileable_type', 'fileable_id'];
 
-    public function Fileable()
+    public function fileable()
     {
         return $this->morphTo();
     }
@@ -28,11 +28,13 @@ class File extends Model
     {
         $fileName = File::createFileName($file);
         $filePath = $file->storeAs('/files', $fileName, 'public');
+        $originalName = $file->getClientOriginalName();
 
         $storedFile = File::create([
             'name' => $fileName,
             'path' => url('/storage/' . $filePath),
-            'alt_text' =>  $altText ?? pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+            'alt_text' =>  $altText || pathinfo($originalName, PATHINFO_FILENAME),
+            'original_name' => $originalName
         ]);
 
         return $storedFile;
