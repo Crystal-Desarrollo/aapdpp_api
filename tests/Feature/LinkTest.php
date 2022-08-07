@@ -192,7 +192,7 @@ class LinkTest extends TestCase
         $response = $this->JSON('delete', '/api/links/' . $link->id);
 
         $response->assertNoContent();
-        $this->assertDatabaseCount("links", 0);
+        $this->assertDatabaseMissing("links", ['id' => $link->id, 'deleted_at' => null]);
     }
 
     /**
