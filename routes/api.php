@@ -27,15 +27,12 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::apiResource("/files", FileController::class);
     Route::apiResource("/meetings", MeetingController::class);
     Route::apiResource("/folders", FolderController::class);
-
+    Route::apiResource("/users", UserController::class);
+    Route::put('/users/{user}/status', [UserController::class, 'updateSubscriptionStatus'])->name('users.updateStatus');
 
     Route::post("/register", [AuthController::class, 'register'])->name("auth.register");
     Route::post("/logout", [AuthController::class, 'logout'])->name("auth.logout");
     Route::get('/user', [AuthController::class, 'me'])->name('auth.me');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
-    Route::put('/users/{user}/status', [UserController::class, 'updateSubscriptionStatus'])->name('users.updateStatus');
 });
 
 Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');
