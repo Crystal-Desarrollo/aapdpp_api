@@ -34,3 +34,4 @@ Route::group(["middleware" => "auth:sanctum"], function () {
 Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');
 Route::get("/articles", [ArticleController::class, 'index']);
 Route::get("/links", [LinkController::class, 'index']);
+Route::get("/users", [UserController::class, 'index']);
