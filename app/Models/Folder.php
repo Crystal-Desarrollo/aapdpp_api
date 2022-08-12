@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Meeting extends Model
+class Folder extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['date', 'location', 'description'];
+    protected $fillable = ['name'];
+
+    public function files()
+    {
+        return $this->morphMany(File::class, "fileable");
+    }
 }
