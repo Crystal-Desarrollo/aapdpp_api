@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder
                     'name' => 'Test Admin',
                     'email' => 'admin@example.com',
                     'email_verified_at' => now(),
+                    'created_at' => now(),
+                    'active' => true,
                     'role_id' => $adminRole->id,
                     'remember_token' => Str::random(10),
                     'password' => bcrypt('mypass'), // password
@@ -53,6 +55,8 @@ class DatabaseSeeder extends Seeder
                     'name' => 'Test User',
                     'email' => 'user@example.com',
                     'email_verified_at' => now(),
+                    'created_at' => now(),
+                    'active' => true,
                     'role_id' => $memberRole->id,
                     'remember_token' => Str::random(10),
                     'password' => bcrypt('mypass'), // password
