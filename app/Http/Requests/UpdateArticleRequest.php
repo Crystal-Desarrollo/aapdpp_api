@@ -28,7 +28,7 @@ class UpdateArticleRequest extends FormRequest
             "body" => ['string', 'required'],
             "description" => ['string', 'nullable'],
             "is_starred" => ['boolean'],
-            "cover" => ['nullable', 'image', "max:5000"]
+            "cover" => ['nullable', 'sometimes', 'image', "max:5000"]
         ];
     }
 }
