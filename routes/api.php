@@ -45,3 +45,4 @@ Route::get("/meetings", [MeetingController::class, 'index']);
 Route::get("/meetings/{meeting}", [MeetingController::class, 'show']);
 Route::get("/files", [FileController::class, 'index']);
 Route::get("/folders", [FolderController::class, 'index']);
+Route::get("/users", [UserController::class, 'index']);
