@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Link;
+use App\Models\Meeting;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
 
             Article::factory()->count(10)->create();
             Link::factory()->count(15)->create();
+            Meeting::factory()->count(10)->create();
         }
 
         if ($env == 'local' || $env == 'staging') {
