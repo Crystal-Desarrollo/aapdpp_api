@@ -26,7 +26,7 @@ class StoreFileRequest extends FormRequest
         return [
             'folder' => 'required|exists:folders,id',
             'files' => 'array|nullable|sometimes',
-            'files.*' => 'file|max:5000|mimes:xlsx,pdf,doc,docx,jpg,png,jpeg,webp,gif,txt'
+            'files.*' => 'file|max:5000|mimes:xlsx,pdf,doc,docx,jpg,png,jpeg,webp,gif,txt,csv'
         ];
     }
 }

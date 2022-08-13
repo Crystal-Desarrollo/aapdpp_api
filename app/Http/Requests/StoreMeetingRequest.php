@@ -28,7 +28,7 @@ class StoreMeetingRequest extends FormRequest
             'location' => 'required|string|max:50',
             'description' => 'required|string',
             'files' => 'array|nullable|sometimes',
-            'files.*' => 'file|max:5000|mimes:xlsx,pdf,doc,docx,jpg,png,jpeg,webp,gif,txt'
+            'files.*' => 'file|max:5000|mimes:xlsx,pdf,doc,docx,jpg,png,jpeg,webp,gif,txt,csv'
         ];
     }
 }
