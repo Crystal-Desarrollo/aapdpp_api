@@ -12,12 +12,12 @@ class Meeting extends Model
     use SoftDeletes;
 
     protected $fillable = ['date', 'location', 'description'];
+    public $with = ['files'];
 
     public function files()
     {
         return $this->morphMany(File::class, 'fileable');
     }
-
 
     /**
      * @param array $files the files to relate to the meeting
@@ -30,7 +30,6 @@ class Meeting extends Model
             $file = File::storeFile($requestFile);
             $this->files()->save($file);
         }
-        $this->load('files');
         return $this;
     }
 }
