@@ -12,4 +12,9 @@ class Meeting extends Model
     use SoftDeletes;
 
     protected $fillable = ['date', 'location', 'description'];
+
+    public function files()
+    {
+        return $this->morphMany(File::class, 'fileable');
+    }
 }

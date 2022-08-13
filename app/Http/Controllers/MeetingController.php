@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMeetingRequest;
 use App\Http\Requests\UpdateMeetingRequest;
+use App\Models\File;
 use App\Models\Meeting;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,15 @@ class MeetingController extends Controller
     {
         $validated = $request->validated();
         $meeting = Meeting::create($validated);
+
+        if (isset($validated['files'])) {
+            foreach ($validated['files'] as $requestFile) {
+                $file = File::storeFile($requestFile);
+                $meeting->files()->save($file);
+            }
+            $meeting->load('files');
+        }
+
         return response($meeting, 201);
     }
 
