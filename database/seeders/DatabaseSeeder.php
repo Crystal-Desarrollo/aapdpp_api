@@ -65,5 +65,25 @@ class DatabaseSeeder extends Seeder
                 ]
             ]);
         }
+
+        if ($env == 'production') {
+            $adminRole = Role::where('name', 'admin')->first();
+            $adminExists = DB::table('users')->where('role_id', '=', $adminRole->id)->count() !== 0;
+
+            if (!$adminExists) {
+                DB::table('users')->insert([
+                    [
+                        'name' => 'Administrador',
+                        'email' => env('DEFAULT_ADMIN_EMAIL'),
+                        'email_verified_at' => now(),
+                        'created_at' => now(),
+                        'active' => true,
+                        'role_id' => $adminRole->id,
+                        'remember_token' => Str::random(10),
+                        'password' => bcrypt(env('DEFAULT_ADMIN_PASS')), // password
+                    ]
+                ]);
+            }
+        }
     }
 }
