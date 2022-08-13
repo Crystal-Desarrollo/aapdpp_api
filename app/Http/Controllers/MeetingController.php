@@ -35,6 +35,7 @@ class MeetingController extends Controller
             $meeting->storeFiles($validated['files']);
         }
 
+        $meeting->load('files');
         return response($meeting, 201);
     }
 
@@ -63,6 +64,7 @@ class MeetingController extends Controller
         if (isset($validated['files'])) {
             $meeting->storeFiles($validated['files']);
         }
+        $meeting->load('files');
         return response($meeting, 200);
     }
 

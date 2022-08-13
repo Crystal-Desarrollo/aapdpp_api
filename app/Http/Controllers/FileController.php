@@ -37,6 +37,7 @@ class FileController extends Controller
             $folder->storeFiles($validated['files']);
         }
 
+        $folder->load('files');
         return response($folder, 201);
     }
 
