@@ -32,11 +32,7 @@ class MeetingController extends Controller
         $meeting = Meeting::create($validated);
 
         if (isset($validated['files'])) {
-            foreach ($validated['files'] as $requestFile) {
-                $file = File::storeFile($requestFile);
-                $meeting->files()->save($file);
-            }
-            $meeting->load('files');
+            $meeting->storeFiles($validated['files']);
         }
 
         return response($meeting, 201);
@@ -64,6 +60,9 @@ class MeetingController extends Controller
     {
         $validated = $request->validated();
         $meeting->update($validated);
+        if (isset($validated['files'])) {
+            $meeting->storeFiles($validated['files']);
+        }
         return response($meeting, 200);
     }
 
