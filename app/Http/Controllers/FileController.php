@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFileRequest;
-use App\Http\Requests\UpdateFileRequest;
 use App\Models\File;
 use App\Models\Folder;
-use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
@@ -23,24 +21,23 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreFileRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFileRequest $request)
     {
-        $requestFiles = $request->file('files');
-        $folderId = $request->input('folder');
-        $folder = Folder::find($folderId);
+        $validated = $request->validated();
+        $folder = Folder::find($validated['folder']);
 
-        $files = [];
-        foreach ($requestFiles as $requestFile) {
-            $file = File::storeFile($requestFile);
-            $folder->files()->save($file);
-            $file->load('fileable');
-            array_push($files, $file);
+        if (!isset($folder)) {
+            return response('Folder not found', 404);
         }
 
-        return response($files, 201);
+        if (isset($validated['files'])) {
+            $folder->storeFiles($validated['files']);
+        }
+
+        return response($folder, 201);
     }
 
     /**
@@ -51,20 +48,6 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        return response($file, 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateFileRequest $request, File $file)
-    {
-        $validated = $request->validated();
-        $file->update($validated);
         return response($file, 200);
     }
 
