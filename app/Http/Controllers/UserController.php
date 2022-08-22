@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(User::with('role')->get(), 200);
+        return response()->json(User::with('role')->orderBy('id', 'DESC')->get(), 200);
     }
 
     public function show(User $user)

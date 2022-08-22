@@ -15,7 +15,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        return response(File::where("fileable_type", Folder::class), 200);
+        return response(File::where("fileable_type", Folder::class)->orderBy('created_at', 'DESC')->get(), 200);
     }
 
     /**

@@ -6,7 +6,6 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Models\File;
-use App\Services\FileService;
 
 class ArticleController extends Controller
 {
@@ -18,7 +17,7 @@ class ArticleController extends Controller
     public function index()
     {
         //TODO show only 6 if no member
-        return response()->json(Article::with('cover')->get(), 200);
+        return response()->json(Article::with('cover')->orderBy('created_at', 'DESC')->get(), 200);
     }
 
     /**

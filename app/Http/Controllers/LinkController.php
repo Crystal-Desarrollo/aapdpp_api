@@ -16,7 +16,7 @@ class LinkController extends Controller
      */
     public function index()
     {
-        return response()->json(Link::all(), 200);
+        return response()->json(Link::orderBy('created_at', 'DESC')->get(), 200);
     }
 
     /**

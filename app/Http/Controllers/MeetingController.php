@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMeetingRequest;
 use App\Http\Requests\UpdateMeetingRequest;
-use App\Models\File;
 use App\Models\Meeting;
-use Illuminate\Http\Request;
 
 class MeetingController extends Controller
 {
@@ -17,7 +15,7 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        return response(Meeting::all(), 200);
+        return response(Meeting::orderBy('created_at', 'DESC')->get(), 200);
     }
 
     /**
