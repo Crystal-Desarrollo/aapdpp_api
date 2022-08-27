@@ -7,23 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactFormEmail extends Mailable
+class BroadcastEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $subject = "Nueva consulta en AAPDPP";
-    public $name, $email, $phone, $body;
+    public $subject, $body;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(array $data)
+    public function __construct(string $subject, string $body)
     {
-        $this->name = $data['name'];
-        $this->email = $data['email'];
-        $this->phone = $data['phone'];
-        $this->body = $data['body'];
+        $this->subject = $subject;
+        $this->body = $body;
     }
 
     /**
@@ -33,6 +30,6 @@ class ContactFormEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contact');
+        return $this->view('emails.broadcast');
     }
 }

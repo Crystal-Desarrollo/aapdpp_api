@@ -13,7 +13,7 @@ class BroadcastRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class BroadcastRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'subject' => 'required|string',
+            'body' => 'required|string',
+            'to' => 'nullable|string|email',
         ];
     }
 }
