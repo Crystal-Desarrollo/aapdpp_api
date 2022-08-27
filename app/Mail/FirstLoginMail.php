@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,17 +12,18 @@ class FirstLoginMail extends Mailable
     use Queueable, SerializesModels;
 
     public $subject = 'Bienvenido a AAPDPP';
-    public $name, $email, $password;
+    public $name, $email, $password, $profileUrl;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $email, $password)
+    public function __construct(User $user, $password)
     {
-        $this->name = $name;
-        $this->email = $email;
+        $this->name = $user->name;
+        $this->email = $user->email;
         $this->password = $password;
+        $this->profileUrl = env('APP_FRONTEND_URL') . "/ingresar";
     }
 
     /**

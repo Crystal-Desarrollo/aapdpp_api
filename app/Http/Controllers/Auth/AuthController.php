@@ -44,7 +44,7 @@ class AuthController extends Controller
         $user->load('avatar');
         $user->load('role');
 
-        $mail = new FirstLoginMail($validated['email'], $validated['name'], $temporalPass);
+        $mail = new FirstLoginMail($user, $temporalPass);
         Mail::to($validated['email'])->send($mail);
 
         return response()->json($user, 201);
