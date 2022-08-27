@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FolderController;
 use App\Http\Controllers\LinkController;
@@ -43,3 +44,6 @@ Route::get("/meetings/{meeting}", [MeetingController::class, 'show']);
 Route::get("/files", [FileController::class, 'index']);
 Route::get("/folders", [FolderController::class, 'index']);
 Route::get("/users", [UserController::class, 'index']);
+
+Route::post("/contact-us", [EmailController::class, 'contactUs']);
+Route::post("/broadcast", [EmailController::class, 'broadcast']);
