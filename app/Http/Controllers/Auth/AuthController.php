@@ -33,12 +33,10 @@ class AuthController extends Controller
         $user->password = bcrypt($temporalPass);
 
         $roleId = Role::where('name', 'member')->first()->id;
-        if ($validated['is_admin']) {
+        if (boolval($validated['is_admin'])) {
             $roleId = Role::where('name', 'admin')->first()->id;
         }
-
         $user->role_id = $roleId;
-
         $user->save();
 
         if (isset($validated['picture'])) {

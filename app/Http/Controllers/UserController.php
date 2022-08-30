@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdateUserStatusRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,20 @@ class UserController extends Controller
     public function update(User $user, UpdateUserRequest $request)
     {
         $validated = $request->validated();
+
+        $roleId = Role::where('name', 'member')->first()->id;
+        error_log(boolval($validated['is_admin']));
+        if (boolval($validated['is_admin'])) {
+            $roleId = Role::where('name', 'admin')->first()->id;
+        }
+        $user->role_id = $roleId;
+
+        if (isset($validated['picture'])) {
+            $picture = $validated['picture'];
+            $storedFile = File::storeFile($picture);
+            $user->avatar()->delete();
+            $user->avatar()->save($storedFile);
+        }
 
         $user->update($validated);
         $user->load('role');

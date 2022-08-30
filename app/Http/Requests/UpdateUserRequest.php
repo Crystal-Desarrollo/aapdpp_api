@@ -16,6 +16,7 @@ class UpdateUserRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,7 +29,8 @@ class UpdateUserRequest extends FormRequest
             'email' => 'string|unique:users,email,' . $this->user->id,
             'phone' => 'string|nullable|max:15',
             'address' => 'string|nullable|max:100',
-            'additional_info' => 'string|nullable|max:512',
+            'additional_info' => 'string|nullable|max:50',
+            'is_admin' => 'required|boolean'
         ];
     }
 }
