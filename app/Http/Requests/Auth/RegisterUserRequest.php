@@ -17,6 +17,18 @@ class RegisterUserRequest extends FormRequest
     }
 
     /**
+     * Prepare inputs for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'is_admin' => boolval($this->is_admin),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -29,7 +41,8 @@ class RegisterUserRequest extends FormRequest
             'phone' => 'string|nullable|max:15',
             'address' => 'string|nullable|max:100',
             'additional_info' => 'string|nullable|max:512',
-            'picture' => 'nullable|image|max:10000'
+            'picture' => 'nullable|image|max:10000',
+            'is_admin' => 'nullable|boolean'
         ];
     }
 }

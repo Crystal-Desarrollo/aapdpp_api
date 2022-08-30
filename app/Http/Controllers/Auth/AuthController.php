@@ -31,7 +31,13 @@ class AuthController extends Controller
 
         $temporalPass = Str::random();
         $user->password = bcrypt($temporalPass);
-        $user->role_id = Role::where('name', 'member')->first()->id;
+
+        $roleId = Role::where('name', 'member')->first()->id;
+        if ($validated['is_admin']) {
+            $roleId = Role::where('name', 'admin')->first()->id;
+        }
+
+        $user->role_id = $roleId;
 
         $user->save();
 
