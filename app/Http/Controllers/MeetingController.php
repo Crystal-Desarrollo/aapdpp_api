@@ -15,7 +15,7 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        return response(Meeting::orderBy('created_at', 'DESC')->get(), 200);
+        return response(Meeting::orderBy('date', 'DESC')->get(), 200);
     }
 
     /**
