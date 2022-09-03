@@ -33,6 +33,6 @@ class ContactFormEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contact');
+        return $this->view('emails.Contact');
     }
 }
