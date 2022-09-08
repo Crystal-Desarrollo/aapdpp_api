@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(User::with('role')->where('email', '<>', 'crystaldesarrollo@gmail.com')->orderBy('id', 'DESC')->get(), 200);
+        return response()->json(User::with('role')->where('email', '<>', 'crystaldesarrollo@gmail.com')->orderBy('id', 'ASC')->get(), 200);
     }
 
     public function show(User $user)
