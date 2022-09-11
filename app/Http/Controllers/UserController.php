@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdateUserStatusRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -33,7 +35,6 @@ class UserController extends Controller
         $validated = $request->validated();
 
         $roleId = Role::where('name', 'member')->first()->id;
-        error_log(boolval($validated['is_admin']));
         if (boolval($validated['is_admin'])) {
             $roleId = Role::where('name', 'admin')->first()->id;
         }
@@ -68,5 +69,24 @@ class UserController extends Controller
         $user->load('avatar');
 
         return response()->json($user, 200);
+    }
+
+    public function changePassword(User $user, ChangePasswordRequest $request)
+    {
+        $validated = $request->validated();
+        $loggedUser = Auth::user();
+
+        $isCurrentPasswordCorrect = Hash::check($validated['current_password'], $loggedUser->password);
+        if (!$isCurrentPasswordCorrect) {
+            return response('Unhautorized', 401);
+        }
+
+        $loggedUserIsAdmin = $loggedUser->role->name === 'admin';
+        if ($loggedUserIsAdmin || $loggedUser->id === $user->id) {
+            $user->password = bcrypt($validated['password']);
+            $user->update();
+        }
+
+        return response()->json('Password updated', 200);
     }
 }

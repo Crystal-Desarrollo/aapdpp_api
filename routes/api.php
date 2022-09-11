@@ -30,6 +30,7 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::apiResource("/folders", FolderController::class);
     Route::apiResource("/users", UserController::class);
     Route::put('/users/{user}/status', [UserController::class, 'updateSubscriptionStatus'])->name('users.updateStatus');
+    Route::put('/users/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
 
     Route::post("/register", [AuthController::class, 'register'])->name("auth.register");
     Route::post("/logout", [AuthController::class, 'logout'])->name("auth.logout");
