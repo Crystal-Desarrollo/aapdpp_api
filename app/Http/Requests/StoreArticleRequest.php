@@ -24,7 +24,7 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => ['string', 'required', 'max:50'],
+            "title" => ['string', 'required'],
             "body" => ['string', 'required'],
             "description" => ['string', 'nullable'],
             "is_starred" => ['boolean'],
