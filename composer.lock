@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d279503a230d1f7dfb23dd299f1a55e7",
+    "content-hash": "fd9f4a0f2ed9d6597bd8344f0d885e51",
     "packages": [
         {
             "name": "brick/math",
@@ -703,6 +703,73 @@
                 }
             ],
             "time": "2022-01-18T15:43:28+00:00"
+        },
+        {
+            "name": "edrmtz01/laravel-jet-spanish",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edrmtz01/laravel-jet-spanish.git",
+                "reference": "5a5957695ab8a96242f1188899df972affac0e7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edrmtz01/laravel-jet-spanish/zipball/5a5957695ab8a96242f1188899df972affac0e7c",
+                "reference": "5a5957695ab8a96242f1188899df972affac0e7c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0.0|^9.0.0",
+                "php": ">=7.3.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0",
+                "phpunit/phpunit": "^8.0.0|^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Edrmtz01\\LaravelJetSpanish\\LaravelJetSpanishServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelJetSpanish": "Edrmtz01\\LaravelJetSpanish\\LaravelJetSpanishFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Edrmtz01\\LaravelJetSpanish\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erick D.",
+                    "email": "e.drmtz01@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Paquete de archivos de traducciones del  inglés al español  para Laravel 9.",
+            "homepage": "https://github.com/edrmtz01/laravel-jet-spanish",
+            "keywords": [
+                "Jetstream traduccion",
+                "edrmtz01",
+                "jetstream translation",
+                "laravel",
+                "laravel jetstream  spanish",
+                "laravel-jet-spanish",
+                "spanish",
+                "traduccion"
+            ],
+            "support": {
+                "issues": "https://github.com/edrmtz01/laravel-jet-spanish/issues",
+                "source": "https://github.com/edrmtz01/laravel-jet-spanish/tree/1.0.0"
+            },
+            "time": "2022-06-11T21:00:29+00:00"
         },
         {
             "name": "egulias/email-validator",
