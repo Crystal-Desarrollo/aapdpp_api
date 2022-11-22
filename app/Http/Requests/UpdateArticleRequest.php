@@ -31,4 +31,14 @@ class UpdateArticleRequest extends FormRequest
             "cover" => ['nullable', 'sometimes', 'image', "max:5000"]
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'título',
+            'body' => 'noticia',
+            'description' => 'descripción',
+            'cover' => 'imagen de portada',
+        ];
+    }
 }

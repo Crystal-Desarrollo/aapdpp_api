@@ -61,7 +61,7 @@ return [
         'numeric' => 'El campo :attribute debe ser mayor o igual que :value.',
         'string' => 'El campo :attribute debe ser mayor o igual que :value caracteres.',
     ],
-    'image' => 'El campo :attributedebe ser una imagen.',
+    'image' => 'El campo :attribute debe ser una imagen.',
     'in' => 'El valor :attribute seleccionado no es válido.',
     'in_array' => 'El campo :attribute no existe en :other.',
     'integer' => 'El campo :attributedebe ser un número entero.',

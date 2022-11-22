@@ -24,11 +24,21 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => ['string', 'required'],
-            "body" => ['string', 'required'],
-            "description" => ['string', 'nullable'],
+            "title" => ['string', 'required', 'max:50000'],
+            "body" => ['string', 'required', 'max:50000'],
+            "description" => ['string', 'nullable', 'max:50000'],
             "is_starred" => ['boolean'],
             "cover" => ['nullable', 'image', "max:5000"]
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'título',
+            'body' => 'noticia',
+            'description' => 'descripción',
+            'cover' => 'imagen de portada',
         ];
     }
 }
