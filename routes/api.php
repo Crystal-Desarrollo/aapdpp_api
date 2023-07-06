@@ -39,6 +39,7 @@ Route::group(["middleware" => "auth:sanctum"], function () {
 
 Route::post("/login", [AuthController::class, 'login'])->name("auth.login")->middleware('guest');
 Route::get("/articles", [ArticleController::class, 'index']);
+Route::get("/articles/{article}", [ArticleController::class, 'show']);
 Route::get("/links", [LinkController::class, 'index']);
 Route::get("/meetings", [MeetingController::class, 'index']);
 Route::get("/meetings/{meeting}", [MeetingController::class, 'show']);
