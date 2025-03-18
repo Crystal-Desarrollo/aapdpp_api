@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $env = env('APP_ENV');
+        $env = config('app.env');
 
         if (DB::table('roles')->count() == 0) {
             DB::table('roles')->insert([['name' => 'admin'], ['name' => 'member']]);
@@ -74,13 +74,13 @@ class DatabaseSeeder extends Seeder
                 DB::table('users')->insert([
                     [
                         'name' => 'Administrador',
-                        'email' => env('DEFAULT_ADMIN_EMAIL'),
+                        'email' => config('auth.admin.email'),
                         'email_verified_at' => now(),
                         'created_at' => now(),
                         'active' => true,
                         'role_id' => $adminRole->id,
                         'remember_token' => Str::random(10),
-                        'password' => bcrypt(env('DEFAULT_ADMIN_PASS')), // password
+                        'password' => bcrypt(config('auth.admin.password')), // password
                     ]
                 ]);
             }

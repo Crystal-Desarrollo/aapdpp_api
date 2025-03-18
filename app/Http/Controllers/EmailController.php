@@ -16,7 +16,7 @@ class EmailController extends Controller
     {
         $validated = $request->validated();
         $mail = new ContactFormEmail($validated);
-        $adminEmail = env('ADMIN_MAIL_ADDRESS');
+        $adminEmail = config('auth.admin.email');
         Mail::to($adminEmail)->send($mail);
 
         return response('Email sent', 200);
